@@ -8,8 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -26,8 +24,8 @@ public class EditCategoryController {
 
             OkHttpClient okHttpClient = new OkHttpClient();
 
-            HttpUrl.Builder builder = HttpUrl.parse("http://localhost:8081/api/v1/category/").newBuilder();
-            builder.addQueryParameter("categoryDto", String.valueOf(category));
+//            HttpUrl.Builder builder = HttpUrl.parse("http://localhost:8081/api/v1/category/").newBuilder();
+//            builder.addQueryParameter("categoryDto", String.valueOf(category));
 
             Request request = new Request.Builder()
                     .url("http://localhost:8081/api/v1/category/" + category.getId())
@@ -69,13 +67,15 @@ public class EditCategoryController {
 
         if (event.getSource().equals(btnSave)) {
 
-            Category category = new Category();
             category.setName(txtName.getText());
             category.setActive(checkActive.isSelected());
 
             OkHttpClient client = new OkHttpClient();
 
-            RequestBody body = RequestBody.create(objectMapper.writeValueAsBytes(category), MediaType.parse("application/json; charset=utf-8"));
+            RequestBody body = RequestBody.create(
+                    objectMapper.writeValueAsBytes(category),
+                    MediaType.parse("application/json; charset=utf-8")
+            );
             Request request;
 
             if (category.getId() == null) {
@@ -98,10 +98,8 @@ public class EditCategoryController {
                 e.printStackTrace();
             }
 
-
         } else if (event.getSource().equals(btnCancel)) {
             btnCancel.getScene().getWindow().hide();
-
         }
 
     }

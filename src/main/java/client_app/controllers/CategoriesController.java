@@ -1,6 +1,5 @@
 package client_app.controllers;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -58,7 +57,6 @@ public class CategoriesController {
                 e.printStackTrace();
             }
 
-
         } else if (event.getSource().equals(mnItemEdit)) {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/edit_category.fxml"));
@@ -78,14 +76,12 @@ public class CategoriesController {
                 e.printStackTrace();
             }
 
-
             Parent root = null;
             try {
                 root = FXMLLoader.load(getClass().getResource("/layout/edit_category.fxml"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
 
         }
     }
